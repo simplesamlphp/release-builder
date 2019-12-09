@@ -8,9 +8,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget
 COPY install_composer.sh /
 RUN /install_composer.sh
-RUN git clone https://github.com/simplesamlphp/simplesamlphp.git /simplesamlphp
-WORKDIR /simplesamlphp
-ARG version
-ENV VERSION=$version
-RUN git checkout origin/simplesamlphp-${VERSION} 
-ENTRYPOINT ["bin/build-release.sh"]
+RUN mkdir /simplesamlphp
+ENTRYPOINT ["/simplesamlphp/bin/build-release.sh"]
